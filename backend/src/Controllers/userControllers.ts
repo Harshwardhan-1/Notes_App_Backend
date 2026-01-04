@@ -33,7 +33,7 @@ bcrypt.genSalt(12, function(err, salt) {
 });
 let token=jwt.sign({gmail:gmail,userId:newUser._id},process.env.JWT_SECRET!);
 res.cookie("token",token,{
-    httpOnly:true,
+    httpOnly:true, 
     secure:true,
     sameSite:"none",
 });

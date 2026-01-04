@@ -14,15 +14,17 @@ app.use(cors({
   credentials:true,
 })); 
 import userRouter from "./Routes/userRoutes";
+import addNotes from "./Routes/NotesRoutes";
 app.get("/",(req : Request,res:Response)=>{
   res.send("hii harsh  here")
 })
 // MongoDB Atlas connection
-mongoose.connect(process.env.MONGO_URL!)
+mongoose.connect(process.env.MONGO_URL!)  
     .then(() => console.log("MongoDB connected"))
     .catch(err => console.log(err)); 
 
 app.use("/api/all",userRouter);
+app.use("/api/notes",addNotes);
 const PORT=process.env.PORT || 5000; 
 app.listen(PORT,()=>{
   console.log(`Server is listening to http://localhost:${PORT}`)
