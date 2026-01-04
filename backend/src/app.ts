@@ -16,7 +16,7 @@ app.use(cors({
 })); 
 import userRouter from "./Routes/userRoutes";
 app.get("/",(req : Request,res:Response)=>{
-  res.send("hii harsh here")
+  res.send("hii harsh  here")
 })
 // MongoDB Atlas connection
 mongoose.connect(process.env.MONGO_URL!)
