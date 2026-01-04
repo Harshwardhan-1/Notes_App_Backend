@@ -27,3 +27,23 @@ export const getAddNotes=async(req:Request,res:Response)=>{
         data:addNotes,
     });
 }
+
+
+
+export const deleteNotes=async(req:Request,res:Response)=>{
+    const {id}=req.body;
+    if(!id){
+        return res.status(401).json({
+            message:"Note id requiered",
+        });
+    }
+    const findId=await notesModel.findOneAndDelete(id);
+    if(!findId){
+        return res.status(404).json({
+             message:"no id found",
+        });
+    }
+    return res.status(200).json({
+        message:"findAndDelete",
+    });
+}
