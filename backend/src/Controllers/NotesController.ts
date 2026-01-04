@@ -58,7 +58,7 @@ export const handleUpdate=async(req:Request,res:Response)=>{
             message:"Update properly",
         });
     }
-    const findId=await notesModel.findById({_id:id,userId});
+    const findId=await notesModel.findOne({_id:id,userId});
     if(!findId){
         return res.status(401).json({
             message:"id not found"
