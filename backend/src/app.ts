@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 dotenv.config();
 
-import verifyToken from "./middleware/verifyToken";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
