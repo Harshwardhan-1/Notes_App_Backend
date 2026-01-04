@@ -32,12 +32,13 @@ export const getAddNotes=async(req:Request,res:Response)=>{
 
 export const deleteNotes=async(req:Request,res:Response)=>{
     const {id}=req.body;
+    const userId=(req as any).user.userId;
     if(!id){
         return res.status(401).json({
             message:"Note id requiered",
         });
     }
-    const findId=await notesModel.findOneAndDelete({_id:id});
+    const findId=await notesModel.findOneAndDelete({_id:id,userId});
     if(!findId){
         return res.status(404).json({
              message:"no id found",
@@ -45,5 +46,39 @@ export const deleteNotes=async(req:Request,res:Response)=>{
     }
     return res.status(200).json({
         message:"findAndDelete",
+    });
+}
+
+
+export const handleUpdate=async(req:Request,res:Response)=>{
+    const {id,title,content}=req.body;
+    const userId=(req as any).user.userId;
+    if(!id || !title || !content){
+        return res.status(401).json({
+            message:"Update properly",
+        });
+    }
+    const findId=await notesModel.findById({_id:id,userId});
+    if(!findId){
+        return res.status(401).json({
+            message:"id not found"
+        });
+    }
+    if(!findId.title){
+        return res.status(401).json({
+            message:"title is not there",
+        });
+    }
+    if(!findId.content){
+        return res.status(401).json({
+            message:"content is not there",
+        });
+    }
+    findId.title=title;
+    findId.content=content;
+    await findId.save();
+    return res.status(200).json({
+        message:"update successfully",
+        data:findId,
     });
 }
