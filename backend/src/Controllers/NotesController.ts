@@ -37,7 +37,7 @@ export const deleteNotes=async(req:Request,res:Response)=>{
             message:"Note id requiered",
         });
     }
-    const findId=await notesModel.findOneAndDelete(id);
+    const findId=await notesModel.findOneAndDelete({_id:id});
     if(!findId){
         return res.status(404).json({
              message:"no id found",
