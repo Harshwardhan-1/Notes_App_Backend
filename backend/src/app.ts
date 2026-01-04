@@ -18,6 +18,10 @@ import addNotes from "./Routes/NotesRoutes";
 app.get("/",(req : Request,res:Response)=>{
   res.send("hii harsh  here")
 })
+
+app.get("/ping",(req:Request,res:Response)=>{
+    res.send('alive');
+})
 // MongoDB Atlas connection
 mongoose.connect(process.env.MONGO_URL!)  
     .then(() => console.log("MongoDB connected"))
