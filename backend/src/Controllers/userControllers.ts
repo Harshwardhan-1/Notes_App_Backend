@@ -215,23 +215,23 @@ export const changePassword=async(req:Request,res:Response)=>{
 
 
 
-export const getUser = async (req: Request, res: Response) => {
+export const getUser=async(req:Request,res:Response)=>{
   const token = req.cookies.token; 
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
+  if (!token) return res.status(401).json({ message:"Unauthorized"});
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-    const user = await userModel.findById((decoded as any).userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const decoded=jwt.verify(token,process.env.JWT_SECRET!);
+    const user=await userModel.findById((decoded as any).userId);
+    if (!user) return res.status(404).json({message:"User not found"});
 
     return res.status(200).json({
-      user: {
-        _id: user._id,
-        name: user.name,
-        gmail: user.gmail,
+      user:{
+        _id:user._id,
+        name:user.name,
+        gmail:user.gmail,
       },
     });
-  } catch (err) {
-    return res.status(401).json({ message: "Unauthorized" });
+  } catch(err){
+    return res.status(401).json({message:"Unauthorized"});
   }
 };
