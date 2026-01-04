@@ -21,7 +21,7 @@ app.get("/",(req : Request,res:Response)=>{
 // MongoDB Atlas connection
 mongoose.connect(process.env.MONGO_URL!)
     .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err)); 
 
 app.use("/api/all",userRouter);
 const PORT=process.env.PORT || 5000; 
